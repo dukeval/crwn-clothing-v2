@@ -1,9 +1,6 @@
-import CategoryItem from "../category-item/category-item.component";
-import "./menu-style.scss"
+import Directory from "../../components/directory/directory.component"
 
-
-
-const Menu =()=>{
+const Home =()=>{
     const categories = [
         {
           id: 1,
@@ -33,12 +30,10 @@ const Menu =()=>{
       ]
 
       return (
-        <div className='categories-container'>
-          {categories.map((category)=>(
-              <CategoryItem key={category.id} category={category}/>
-          ))}
+        <div>
+            <Directory categories={categories} />
         </div>
       )
 }
 
-export default Menu;
+export default Home;
