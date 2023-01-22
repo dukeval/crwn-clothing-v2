@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../Contexts/user.context";
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils';
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
@@ -20,6 +21,8 @@ const SignUpForm = ()=>{
         setFormFields(defaultFormFields);
     }
 
+    const { setCurrentUser } = useContext(UserContext);
+
     const handleSubmit= async(event)=>{
         event.preventDefault();
         if(password !== confirmPassword) { console.log('Password mismatch'); return;}
@@ -28,6 +31,8 @@ const SignUpForm = ()=>{
             const {user} = await createAuthUserWithEmailAndPassword(email,password);
             //user.displayName = displayName;
             await createUserDocumentFromAuth(user, {displayName});
+
+            setCurrentUser(user);
 
             resetFormFields();
         }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
+import { createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
@@ -35,11 +35,11 @@ const SignInForm =()=>{
             else
                 alert("Invalid credentials")
             
-            //resetFormFields();
+            resetFormFields();
         }
         catch(err)
         {
-            switch (err.code.toLowerCase()) {
+            switch (err.code) {
                 case "auth/wrong-password":
                     alert("You've entered an invalid password for that email.");
                     break;
@@ -59,8 +59,8 @@ const SignInForm =()=>{
         setFormFields({...formFields,[name]:value});
     };
 
-    const signInWithGoogle=()=>{
-        signInWithGooglePopup();
+    const signInWithGoogle= async ()=>{
+        await signInWithGooglePopup();
     };
 
     return (
