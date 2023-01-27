@@ -28,13 +28,8 @@ const SignInForm =()=>{
         if(email==='' || password==='') return;
 
         try{
-            const userCred = await signInAuthUserWithEmailAndPassword(email,password);
+            await signInAuthUserWithEmailAndPassword(email,password);
 
-            if(userCred.user)
-                alert("You're logged in!!");
-            else
-                alert("Invalid credentials")
-            
             resetFormFields();
         }
         catch(err)
